@@ -77,13 +77,13 @@ $color-white: #fff;
 
   &--visible {
     display: grid;
-    background-image: url('/afbeeldingen/theater-gesloten.jpg');
+    background-image: url('../afbeeldingen/theater-gesloten.jpg');
     background-size: cover;
     max-width: 100%;
     object-fit: contain;
 
     @media only screen and (max-width: $bp-1000) {
-      background-image: url('/afbeeldingen/theater-gesloten-1080.jpg');
+      background-image: url('../afbeeldingen/theater-gesloten-1080.jpg');
     }
   }
 }
@@ -94,7 +94,7 @@ $color-white: #fff;
 //   left: 0;
 //   width: 100%;
 //   height: 100%;
-//   background-image: url('/afbeeldingen/theater-gesloten.jpg');
+//   background-image: url('../afbeeldingen/theater-gesloten.jpg');
 //   display: none;
 //   &--visible {
 //     display: block;

@@ -45,13 +45,13 @@ html {
   height: 100vh; }
   .closed--visible {
     display: grid;
-    background-image: url("/afbeeldingen/theater-gesloten.jpg");
+    background-image: url("../afbeeldingen/theater-gesloten.jpg");
     background-size: cover;
     max-width: 100%;
     object-fit: contain; }
     @media only screen and (max-width: 62.5em) {
       .closed--visible {
-        background-image: url("/afbeeldingen/theater-gesloten-1080.jpg"); } }
+        background-image: url("../afbeeldingen/theater-gesloten-1080.jpg"); } }
 
 .heading-1 {
   display: block;
