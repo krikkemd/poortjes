@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Poortjes</title>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1 class="titel heading-1">Titel</h1>
+        <h2 class="artiest heading-2">Artiest</h2>
+      </header>
+
+      <!-- We zouden een container voor de img kunnen gebruiken, deze plaatsen op de grid, en als backimg instellen -->
+      <img class="img" src="" alt="Afbeelding Voorstelling" />
+      <!-- <div class="img"></div> -->
+
+      <footer class="footer">
+        <div class="footer__locatie">
+          <p class="footer__locatie__text paragraph locatie">zaal</p>
+        </div>
+
+        <div class="footer__tijden">
+          <p class="paragraph">Aanvang</p>
+          <p class="paragraph">Pauze</p>
+          <p class="paragraph">Einde</p>
+
+          <p class="footer__tijden__tijd footer__tijden__tijd--aanvang paragraph start">00:00</p>
+          <p class="footer__tijden__tijd footer__tijden__tijd--pauze paragraph pauze">00:00</p>
+          <p class="footer__tijden__tijd footer__tijden__tijd--einde paragraph einde">&plusmn; 00:00</p>
+        </div>
+
+        <div class="footer__logo">
+          <img src="img/logo-blauw-dnk.png" alt="DNK Logo" />
+        </div>
+      </footer>
+    </div>
+    <div class="closed closed--visible">
+      <img src="/afbeeldingen/theater-gesloten.jpg" alt="theater-gesloten" />
+    </div>
+    <div class="totziens"></div>
+  </body>
+  <script src="script.js"></script>
+</html>

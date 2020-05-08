@@ -1,0 +1,114 @@
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: inherit; }
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%; }
+  @media only screen and (max-width: 62.5em) {
+    html {
+      font-size: 56.25%; } }
+  @media only screen and (max-width: 56.25em) {
+    html {
+      font-size: 50%; } }
+  @media only screen and (max-width: 43.75em) {
+    html {
+      font-size: 43.75%; } }
+  @media only screen and (max-width: 31.25em) {
+    html {
+      font-size: 37.5%; } }
+  @media only screen and (max-width: 25em) {
+    html {
+      font-size: 31.25%; } }
+
+.container {
+  font-family: sans-serif;
+  height: 100vh;
+  background-color: #2b1e49;
+  color: #fff;
+  overflow: hidden;
+  display: none;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr); }
+  .container--visible {
+    display: grid; }
+
+.closed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: 100%;
+  height: 100%;
+  display: none; }
+  .closed--visible {
+    display: grid; }
+
+.heading-1 {
+  display: block;
+  width: 100%;
+  height: 100%;
+  font-size: 7rem; }
+
+.heading-2 {
+  font-size: 3.5rem;
+  text-transform: uppercase; }
+
+.heading-3 {
+  font-size: 1.8rem;
+  font-weight: lighter;
+  letter-spacing: 2px;
+  word-spacing: 1px; }
+
+.paragraph {
+  font-size: 3.5rem; }
+  .paragraph--big {
+    font-size: 4rem;
+    letter-spacing: 0.5px; }
+
+.header {
+  display: grid;
+  grid-template-rows: repeat(2, min-content);
+  grid-row-gap: 4rem;
+  margin-left: 8rem;
+  margin-right: 8rem;
+  margin-top: 10rem; }
+
+.img {
+  grid-row: 1 / 3;
+  grid-column: 2 / 3;
+  width: 100%;
+  object-fit: contain; }
+
+.footer {
+  grid-row: 2 / 3;
+  grid-column: 1 / 2;
+  margin-left: 8rem;
+  display: grid;
+  align-items: end; }
+  .footer__locatie__text {
+    text-align: center;
+    width: max-content;
+    background-color: #e73454;
+    padding: 1.25rem 2rem;
+    border-radius: 1.5rem; }
+  .footer__tijden {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 4rem;
+    text-align: center;
+    margin-right: 8rem; }
+    .footer__tijden__tijd {
+      width: 100%;
+      text-transform: uppercase;
+      padding: 1rem 2rem;
+      border: 1px solid #008bbc;
+      border-radius: 1.5rem; }
+      .footer__tijden__tijd--aanvang {
+        background-color: #008bbc; }
+  .footer__logo {
+    transform: scale(0.75);
+    padding: 1rem;
+    justify-self: end; }
