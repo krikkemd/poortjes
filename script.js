@@ -1,4 +1,4 @@
-const urls = ["events.json", "ncGZ.json", "ncRZ.json"];
+const urls = ['events.json', 'ncGZ.json', 'ncRZ.json'];
 let jsonArray = [];
 let eventsArray = [];
 let zaalArray = [];
@@ -6,7 +6,7 @@ let voorstellingen = [];
 
 waitFordata();
 
-// Reload page every 4 hours        1s     1m   1h   4
+// Reload page every 4 hours        1s     1m   1h   4h
 setTimeout(() => location.reload(), 1000 * 60 * 60 * 4);
 
 // async methode
@@ -45,7 +45,7 @@ function getData(url) {
     fetch(url).then((response) => {
       return response.json().then((result) => {
         jsonArray.push(result.data);
-        return resolve("dit is voor reference, zo werkt die return");
+        return resolve('dit is voor reference, zo werkt die return');
       });
     });
   });
@@ -78,7 +78,7 @@ function processEvents(eventsData) {
     let eind = event.defaultscheduleendtime;
 
     // if the location of the event is either grote zaal or rabo zaal, set objects and push to array
-    if (locatie.toLowerCase() == "grote zaal" || locatie.toLowerCase() == "rabo zaal") {
+    if (locatie.toLowerCase() == 'grote zaal' || locatie.toLowerCase() == 'rabo zaal') {
       eventObj = {
         eventid: eventid,
         locatie: locatie,
@@ -136,7 +136,7 @@ function processZalen(zaalData) {
 function combineData(eventsArray, zaalArray) {
   // Dates to add timestamps for narrowcasting start & end
   let d = new Date();
-  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
   eventsArray.forEach((el, i) => {
     if (el.eventid == eventsArray[i].eventid) {
@@ -213,13 +213,13 @@ function createHTML(voorstellingen) {
   let count = -1;
   let timer;
 
-  let titel = document.querySelector(".titel");
-  let artiest = document.querySelector(".artiest");
-  let img = document.querySelector(".img");
-  let locatie = document.querySelector(".locatie");
-  let start = document.querySelector(".start");
-  let pauze = document.querySelector(".pauze");
-  let einde = document.querySelector(".einde");
+  let titel = document.querySelector('.titel');
+  let artiest = document.querySelector('.artiest');
+  let img = document.querySelector('.img');
+  let locatie = document.querySelector('.locatie');
+  let start = document.querySelector('.start');
+  let pauze = document.querySelector('.pauze');
+  let einde = document.querySelector('.einde');
 
   // console.log(count);
   console.log(voorstellingen.length);
@@ -240,7 +240,7 @@ function createHTML(voorstellingen) {
       einde.innerHTML = voorstellingen[count].eind;
 
       if (voorstellingen[count].pauze == null) {
-        pauze.innerHTML = "-";
+        pauze.innerHTML = '-';
       } else {
         pauze.innerHTML = voorstellingen[count].pauze;
       }
@@ -287,33 +287,33 @@ function compareLocatie(a, b) {
 
 // Container
 function hideContainer() {
-  let container = document.querySelector(".container");
-  container.classList.remove("container--visible");
+  let container = document.querySelector('.container');
+  container.classList.remove('container--visible');
 }
 
 function showContainer() {
-  let container = document.querySelector(".container");
-  container.classList.add("container--visible");
+  let container = document.querySelector('.container');
+  container.classList.add('container--visible');
 }
 
 // Closed
 function hideClosedScreen() {
-  let closed = document.querySelector(".closed");
-  closed.classList.remove("closed--visible");
+  let closed = document.querySelector('.closed');
+  closed.classList.remove('closed--visible');
 }
 
 function showClosedScreen() {
-  let closed = document.querySelector(".closed");
-  closed.classList.add("closed--visible");
+  let closed = document.querySelector('.closed');
+  closed.classList.add('closed--visible');
 }
 
 // Tot Ziens
 function hideTotziens() {
-  let totziens = document.querySelector(".totziens");
-  totziens.classList.remove("totziens--visible");
+  let totziens = document.querySelector('.totziens');
+  totziens.classList.remove('totziens--visible');
 }
 
 function showTotziens() {
-  let totziens = document.querySelector(".totziens");
-  totziens.classList.add("totziens--visible");
+  let totziens = document.querySelector('.totziens');
+  totziens.classList.add('totziens--visible');
 }

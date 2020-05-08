@@ -1,7 +1,7 @@
 node_modules
 package-lock.json
 OG.css
-OG.json
+OG.js
 event_query.php
 nc_queryGZ.php
 nc_queryRZ.php

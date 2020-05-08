@@ -18,6 +18,7 @@
   },
   "scripts": {
     "watch": "node-sass scss/main.scss css/style.css -w & webpack --watch",
+    "watch:windows": "start node-sass scss/main.scss css/style.css -w && start webpack --watch",
     "compile:sass": "node-sass scss/main.scss css/style.comp.css",
     "prefix:css": "postcss --use autoprefixer -b \"last 10 versions\" css/style.comp.css -o css/style.prefix.css",
     "compress:css": "node-sass css/style.prefix.css css/style.css --output-style compressed",
