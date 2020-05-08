@@ -1,4 +1,4 @@
-const urls = ['events.json', 'ncGZ.json', 'ncRZ.json'];
+const urls = ["events.json", "ncGZ.json", "ncRZ.json"];
 let jsonArray = [];
 let eventsArray = [];
 let zaalArray = [];
@@ -45,7 +45,7 @@ function getData(url) {
     fetch(url).then((response) => {
       return response.json().then((result) => {
         jsonArray.push(result.data);
-        return resolve('dit is voor reference, zo werkt die return');
+        return resolve("dit is voor reference, zo werkt die return");
       });
     });
   });
@@ -78,7 +78,10 @@ function processEvents(eventsData) {
     let eind = event.defaultscheduleendtime;
 
     // if the location of the event is either grote zaal or rabo zaal, set objects and push to array
-    if (locatie.toLowerCase() == 'grote zaal' || locatie.toLowerCase() == 'rabo zaal') {
+    if (
+      locatie.toLowerCase() == "grote zaal" ||
+      locatie.toLowerCase() == "rabo zaal"
+    ) {
       eventObj = {
         eventid: eventid,
         locatie: locatie,
@@ -136,7 +139,20 @@ function processZalen(zaalData) {
 function combineData(eventsArray, zaalArray) {
   // Dates to add timestamps for narrowcasting start & end
   let d = new Date();
-  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
 
   eventsArray.forEach((el, i) => {
     if (el.eventid == eventsArray[i].eventid) {
@@ -146,8 +162,22 @@ function combineData(eventsArray, zaalArray) {
         titel: zaalArray[i].titel,
         artiest: zaalArray[i].artiest,
         start: eventsArray[i].start,
-        ncstart: new Date(`${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()} ${el.start}`).valueOf() / 3600000 - 4,
-        nceind: new Date(`${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()} ${el.eind}`).valueOf() / 3600000 - 0.25,
+        ncstart:
+          new Date(
+            `${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()} ${
+              el.start
+            }`
+          ).valueOf() /
+            3600000 -
+          4,
+        nceind:
+          new Date(
+            `${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()} ${
+              el.eind
+            }`
+          ).valueOf() /
+            3600000 -
+          0.25,
         pauze: zaalArray[i].pauze,
         eind: eventsArray[i].eind,
         vber: zaalArray[i].vber,
@@ -170,18 +200,24 @@ function combineData(eventsArray, zaalArray) {
 // Check timevalues to schedule show visibility, checked every few seconds from CreateHTML timer function
 function processData(voorstellingen, HTMLtimer) {
   let currentTime = new Date().getTime() / 3600000;
-  console.log(`${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`);
+  console.log(
+    `${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`
+  );
 
   voorstellingen.forEach((voorstelling, i) => {
     // Start de narrowcasting wanneer het later is dan ncstart tijd (ncstart = starttijd - 4 uur)
     if (currentTime >= voorstelling.ncstart) {
       // NARROWCASTING STARTEN
-      console.log(`Start de Narrowcasting voor Artiest: ${voorstelling.artiest} Voorstelling: ${voorstelling.titel}`);
+      console.log(
+        `Start de Narrowcasting voor Artiest: ${voorstelling.artiest} Voorstelling: ${voorstelling.titel}`
+      );
     }
 
     // Verwijder de voorstelling wanneer het later is dan nceind (nceind = eindtijd - 0.25 uur (15min))
     if (currentTime >= voorstelling.nceind) {
-      console.log(`Stop de Narrowcasting voor Artiest: ${voorstelling.artiest} Voorstelling: ${voorstelling.titel}`);
+      console.log(
+        `Stop de Narrowcasting voor Artiest: ${voorstelling.artiest} Voorstelling: ${voorstelling.titel}`
+      );
       voorstellingen.splice(voorstelling[i], 1);
     }
   });
@@ -205,13 +241,13 @@ function createHTML(voorstellingen) {
   let count = -1;
   let timer;
 
-  let titel = document.querySelector('.titel');
-  let artiest = document.querySelector('.artiest');
-  let img = document.querySelector('.img');
-  let locatie = document.querySelector('.locatie');
-  let start = document.querySelector('.start');
-  let pauze = document.querySelector('.pauze');
-  let einde = document.querySelector('.einde');
+  let titel = document.querySelector(".titel");
+  let artiest = document.querySelector(".artiest");
+  let img = document.querySelector(".img");
+  let locatie = document.querySelector(".locatie");
+  let start = document.querySelector(".start");
+  let pauze = document.querySelector(".pauze");
+  let einde = document.querySelector(".einde");
 
   // console.log(count);
   console.log(voorstellingen.length);
@@ -241,7 +277,7 @@ function createHTML(voorstellingen) {
       einde.innerHTML = voorstellingen[count].eind;
 
       if (voorstellingen[count].pauze == null) {
-        pauze.innerHTML = '-';
+        pauze.innerHTML = "-";
       } else {
         pauze.innerHTML = voorstellingen[count].pauze;
       }
@@ -288,33 +324,33 @@ function compareLocatie(a, b) {
 
 // Container
 function hideContainer() {
-  let container = document.querySelector('.container');
-  container.classList.remove('container--visible');
+  let container = document.querySelector(".container");
+  container.classList.remove("container--visible");
 }
 
 function showContainer() {
-  let container = document.querySelector('.container');
-  container.classList.add('container--visible');
+  let container = document.querySelector(".container");
+  container.classList.add("container--visible");
 }
 
 // Closed
 function hideClosedScreen() {
-  let closed = document.querySelector('.closed');
-  closed.classList.remove('closed--visible');
+  let closed = document.querySelector(".closed");
+  closed.classList.remove("closed--visible");
 }
 
 function showClosedScreen() {
-  let closed = document.querySelector('.closed');
-  closed.classList.add('closed--visible');
+  let closed = document.querySelector(".closed");
+  closed.classList.add("closed--visible");
 }
 
 // Tot Ziens
 function hideTotziens() {
-  let totziens = document.querySelector('.totziens');
-  totziens.classList.remove('totziens--visible');
+  let totziens = document.querySelector(".totziens");
+  totziens.classList.remove("totziens--visible");
 }
 
 function showTotziens() {
-  let totziens = document.querySelector('.totziens');
-  totziens.classList.add('totziens--visible');
+  let totziens = document.querySelector(".totziens");
+  totziens.classList.add("totziens--visible");
 }
