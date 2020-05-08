@@ -78,10 +78,7 @@ function processEvents(eventsData) {
     let eind = event.defaultscheduleendtime;
 
     // if the location of the event is either grote zaal or rabo zaal, set objects and push to array
-    if (
-      locatie.toLowerCase() == "grote zaal" ||
-      locatie.toLowerCase() == "rabo zaal"
-    ) {
+    if (locatie.toLowerCase() == "grote zaal" || locatie.toLowerCase() == "rabo zaal") {
       eventObj = {
         eventid: eventid,
         locatie: locatie,
@@ -139,20 +136,7 @@ function processZalen(zaalData) {
 function combineData(eventsArray, zaalArray) {
   // Dates to add timestamps for narrowcasting start & end
   let d = new Date();
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
+  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
   eventsArray.forEach((el, i) => {
     if (el.eventid == eventsArray[i].eventid) {
@@ -162,22 +146,8 @@ function combineData(eventsArray, zaalArray) {
         titel: zaalArray[i].titel,
         artiest: zaalArray[i].artiest,
         start: eventsArray[i].start,
-        ncstart:
-          new Date(
-            `${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()} ${
-              el.start
-            }`
-          ).valueOf() /
-            3600000 -
-          4,
-        nceind:
-          new Date(
-            `${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()} ${
-              el.eind
-            }`
-          ).valueOf() /
-            3600000 -
-          0.25,
+        ncstart: new Date(`${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()} ${el.start}`).valueOf() / 3600000 - 4,
+        nceind: new Date(`${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()} ${el.eind}`).valueOf() / 3600000 - 0.25,
         pauze: zaalArray[i].pauze,
         eind: eventsArray[i].eind,
         vber: zaalArray[i].vber,
@@ -200,24 +170,26 @@ function combineData(eventsArray, zaalArray) {
 // Check timevalues to schedule show visibility, checked every few seconds from CreateHTML timer function
 function processData(voorstellingen, HTMLtimer) {
   let currentTime = new Date().getTime() / 3600000;
-  console.log(
-    `${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`
-  );
+  console.log(`${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`);
 
   voorstellingen.forEach((voorstelling, i) => {
     // Start de narrowcasting wanneer het later is dan ncstart tijd (ncstart = starttijd - 4 uur)
     if (currentTime >= voorstelling.ncstart) {
       // NARROWCASTING STARTEN
-      console.log(
-        `Start de Narrowcasting voor Artiest: ${voorstelling.artiest} Voorstelling: ${voorstelling.titel}`
-      );
+      console.log(`Start de Narrowcasting voor Artiest: ${voorstelling.artiest} Voorstelling: ${voorstelling.titel}`);
+
+      // Wanneer er voorstellingen zijn:
+      if (voorstellingen.length) {
+        // Laat voorstellingsdata zien
+        showContainer();
+        // Verberg theater gesloten scherm
+        hideClosedScreen();
+      }
     }
 
     // Verwijder de voorstelling wanneer het later is dan nceind (nceind = eindtijd - 0.25 uur (15min))
     if (currentTime >= voorstelling.nceind) {
-      console.log(
-        `Stop de Narrowcasting voor Artiest: ${voorstelling.artiest} Voorstelling: ${voorstelling.titel}`
-      );
+      console.log(`Stop de Narrowcasting voor Artiest: ${voorstelling.artiest} Voorstelling: ${voorstelling.titel}`);
       voorstellingen.splice(voorstelling[i], 1);
     }
   });
@@ -255,15 +227,6 @@ function createHTML(voorstellingen) {
   // Interval die voor de switch tussen voorstellingen zorgt
   timer = setInterval(() => {
     processData(voorstellingen, timer);
-
-    // Wanneer er voorstellingen zijn:
-    if (voorstellingen.length) {
-      // Laat voorstellingsdata zien
-      showContainer();
-
-      // Verberg theater gesloten scherm
-      hideClosedScreen();
-    }
 
     // loop door de array met voorstellingen, switch om de zoveel seconden
     if (count < voorstellingen.length - 1) {
