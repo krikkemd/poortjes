@@ -146,7 +146,7 @@ function combineData(eventsArray, zaalArray) {
         titel: zaalArray[i].titel,
         artiest: zaalArray[i].artiest,
         start: eventsArray[i].start,
-        ncstart: new Date(`${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()} ${el.start}`).valueOf() / 3600000 - 3,
+        ncstart: new Date(`${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()} ${el.start}`).valueOf() / 3600000 - 4,
         nceind: new Date(`${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()} ${el.eind}`).valueOf() / 3600000 - 0.25,
         pauze: zaalArray[i].pauze,
         eind: eventsArray[i].eind,

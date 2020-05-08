@@ -52,7 +52,6 @@ $color-white: #fff;
 .container {
   font-family: sans-serif;
   height: 100vh;
-  // max-height: 100vh;
   background-color: $color-purple;
   color: $color-white;
   overflow: hidden;
@@ -64,17 +63,27 @@ $color-white: #fff;
   &--visible {
     display: grid;
   }
+
+  @media only screen and (max-width: $bp-1000) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .closed {
-  position: absolute;
-  top: 0;
-  left: 0;
-  max-width: 100%;
-  height: 100%;
   display: none;
+  height: 100vh;
+  // overflow: hidden;
+
   &--visible {
     display: grid;
+    background-image: url('/afbeeldingen/theater-gesloten.jpg');
+    background-size: cover;
+    max-width: 100%;
+    object-fit: contain;
+
+    @media only screen and (max-width: $bp-1000) {
+      background-image: url('/afbeeldingen/theater-gesloten-1080.jpg');
+    }
   }
 }
 
@@ -138,6 +147,10 @@ $color-white: #fff;
 
   width: 100%;
   object-fit: contain;
+
+  @media only screen and (max-width: $bp-1000) {
+    display: none;
+  }
 }
 
 .footer {
@@ -176,20 +189,13 @@ $color-white: #fff;
       &--aanvang {
         background-color: $color-blue;
       }
-
-      &--pauze {
-      }
-
-      &--einde {
-      }
     }
   }
 
+  /////// Logo ///////
   &__logo {
     transform: scale(0.75);
     padding: 1rem;
     justify-self: end;
   }
 }
-
-/////// Logo ///////
