@@ -6,7 +6,7 @@ let voorstellingen = [];
 
 waitFordata();
 
-// Reload page every 4 hours        1s     1m   1h   4h
+// Reload page every 4 hours        1s     1m   1h   4
 setTimeout(() => location.reload(), 1000 * 60 * 60 * 4);
 
 // async methode
@@ -15,7 +15,7 @@ async function waitFordata() {
   await getData(urls[1]);
   await getData(urls[2]);
   //   console.log(a); // dit is voor reference
-  //   console.log(jsonArray);
+  //   console.log(jsonArray)
 
   // set data variables
   let eventsJson = jsonArray[0];
@@ -132,7 +132,7 @@ function processZalen(zaalData) {
   zaalArray.sort(compareID);
 }
 
-// Combine data from eventsArray and zaalArray and push to voorstellingen array
+// Combine data from eventsArray and zaalArray and push to voorstellingen arra
 function combineData(eventsArray, zaalArray) {
   // Dates to add timestamps for narrowcasting start & end
   let d = new Date();
@@ -140,13 +140,13 @@ function combineData(eventsArray, zaalArray) {
 
   eventsArray.forEach((el, i) => {
     if (el.eventid == eventsArray[i].eventid) {
-      mergedObj = {
+      let mergedObj = {
         eventid: eventsArray[i].eventid,
         locatie: eventsArray[i].locatie,
         titel: zaalArray[i].titel,
         artiest: zaalArray[i].artiest,
         start: eventsArray[i].start,
-        ncstart: new Date(`${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()} ${el.start}`).valueOf() / 3600000 - 4,
+        ncstart: new Date(`${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()} ${el.start}`).valueOf() / 3600000 - 3,
         nceind: new Date(`${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()} ${el.eind}`).valueOf() / 3600000 - 0.25,
         pauze: zaalArray[i].pauze,
         eind: eventsArray[i].eind,
