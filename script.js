@@ -132,7 +132,7 @@ function processZalen(zaalData) {
   zaalArray.sort(compareID);
 }
 
-// Combine data from eventsArray and zaalArray and push to voorstellingen arra
+// Combine data from eventsArray and zaalArray and push to voorstellingen array
 function combineData(eventsArray, zaalArray) {
   // Dates to add timestamps for narrowcasting start & end
   let d = new Date();
