@@ -147,7 +147,7 @@ function combineData(eventsArray, zaalArray) {
         artiest: zaalArray[i].artiest,
         start: eventsArray[i].start,
         ncstart: new Date(`${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()} ${el.start}`).valueOf() / 3600000 - 4,
-        nceind: new Date(`${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()} ${el.eind}`).valueOf() / 3600000 - 0.25,
+        nceind: new Date(`${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()} ${el.eind}`).valueOf() / 3600000 + 1,
         pauze: zaalArray[i].pauze,
         eind: eventsArray[i].eind,
         vber: zaalArray[i].vber,
@@ -210,8 +210,15 @@ function processData(voorstellingen, HTMLtimer) {
 
 // Paint the DOM
 function createHTML(voorstellingen) {
-  let count = -1;
+  let count;
   let timer;
+  let firstrun = false;
+
+  if (!firstrun) {
+    count = 0
+  } else {
+    count = -1
+  }
 
   let titel = document.querySelector('.titel');
   let artiest = document.querySelector('.artiest');
@@ -220,8 +227,22 @@ function createHTML(voorstellingen) {
   let start = document.querySelector('.start');
   let pauze = document.querySelector('.pauze');
   let einde = document.querySelector('.einde');
+  
+  // First run
+  titel.innerHTML = voorstellingen[count].titel;
+  artiest.innerHTML = voorstellingen[count].artiest;
+  img.src = `./afbeeldingen/${voorstellingen[count].afb}`;
+  locatie.innerHTML = voorstellingen[count].locatie;
+  start.innerHTML = voorstellingen[count].start;
+  einde.innerHTML = voorstellingen[count].eind;
 
-  // console.log(count);
+  if (voorstellingen[count].pauze == null) {
+    pauze.innerHTML = '-';
+  } else {
+    pauze.innerHTML = voorstellingen[count].pauze;
+  }
+
+  console.log(count);
   console.log(voorstellingen.length);
 
   // Interval die voor de switch tussen voorstellingen zorgt
@@ -230,7 +251,9 @@ function createHTML(voorstellingen) {
 
     // loop door de array met voorstellingen, switch om de zoveel seconden
     if (count < voorstellingen.length - 1) {
+      firstrun = true;
       count++;
+      console.log(count)
 
       titel.innerHTML = voorstellingen[count].titel;
       artiest.innerHTML = voorstellingen[count].artiest;
@@ -247,7 +270,7 @@ function createHTML(voorstellingen) {
     } else {
       count = -1;
     }
-  }, 3000);
+  }, 10000);
 }
 
 // Some helper functions //
