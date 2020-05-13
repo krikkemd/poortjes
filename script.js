@@ -215,9 +215,9 @@ function createHTML(voorstellingen) {
   let firstrun = false;
 
   if (!firstrun) {
-    count = 0
+    count = 0;
   } else {
-    count = -1
+    count = -1;
   }
 
   let titel = document.querySelector('.titel');
@@ -227,7 +227,7 @@ function createHTML(voorstellingen) {
   let start = document.querySelector('.start');
   let pauze = document.querySelector('.pauze');
   let einde = document.querySelector('.einde');
-  
+
   // First run
   titel.innerHTML = voorstellingen[count].titel;
   artiest.innerHTML = voorstellingen[count].artiest;
@@ -253,7 +253,7 @@ function createHTML(voorstellingen) {
     if (count < voorstellingen.length - 1) {
       firstrun = true;
       count++;
-      console.log(count)
+      console.log(count);
 
       titel.innerHTML = voorstellingen[count].titel;
       artiest.innerHTML = voorstellingen[count].artiest;
@@ -267,8 +267,21 @@ function createHTML(voorstellingen) {
       } else {
         pauze.innerHTML = voorstellingen[count].pauze;
       }
-    } else {
-      count = -1;
+    } else if (count == voorstellingen.length - 1) {
+      count = 0;
+
+      titel.innerHTML = voorstellingen[count].titel;
+      artiest.innerHTML = voorstellingen[count].artiest;
+      img.src = `./afbeeldingen/${voorstellingen[count].afb}`;
+      locatie.innerHTML = voorstellingen[count].locatie;
+      start.innerHTML = voorstellingen[count].start;
+      einde.innerHTML = voorstellingen[count].eind;
+
+      if (voorstellingen[count].pauze == null) {
+        pauze.innerHTML = '-';
+      } else {
+        pauze.innerHTML = voorstellingen[count].pauze;
+      }
     }
   }, 10000);
 }
