@@ -147,7 +147,7 @@ function combineData(eventsArray, zaalArray) {
         artiest: zaalArray[i].artiest,
         start: eventsArray[i].start,
         ncstart: new Date(`${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()} ${el.start}`).valueOf() / 3600000 - 4,
-        nceind: new Date(`${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()} ${el.eind}`).valueOf() / 3600000 + 1,
+        nceind: new Date(`${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()} ${el.eind}`).valueOf() / 3600000 - 0.25,
         pauze: zaalArray[i].pauze,
         eind: eventsArray[i].eind,
         vber: zaalArray[i].vber,
@@ -171,13 +171,12 @@ function combineData(eventsArray, zaalArray) {
 function processData(voorstellingen, HTMLtimer) {
   let currentTime = new Date().getTime() / 3600000;
   console.log(`${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`);
+  console.log(voorstellingen);
 
   voorstellingen.forEach((voorstelling, i) => {
     // Start de narrowcasting wanneer het later is dan ncstart tijd (ncstart = starttijd - 4 uur)
     if (currentTime >= voorstelling.ncstart) {
       // NARROWCASTING STARTEN
-      console.log(`Start de Narrowcasting voor Artiest: ${voorstelling.artiest} Voorstelling: ${voorstelling.titel}`);
-
       // Wanneer er voorstellingen zijn:
       if (voorstellingen.length) {
         // Laat voorstellingsdata zien
@@ -191,6 +190,7 @@ function processData(voorstellingen, HTMLtimer) {
     if (currentTime >= voorstelling.nceind) {
       console.log(`Stop de Narrowcasting voor Artiest: ${voorstelling.artiest} Voorstelling: ${voorstelling.titel}`);
       voorstellingen.splice(voorstelling[i], 1);
+      console.log(voorstellingen);
     }
   });
 
@@ -241,9 +241,6 @@ function createHTML(voorstellingen) {
   } else {
     pauze.innerHTML = voorstellingen[count].pauze;
   }
-
-  console.log(count);
-  console.log(voorstellingen.length);
 
   // Interval die voor de switch tussen voorstellingen zorgt
   timer = setInterval(() => {
