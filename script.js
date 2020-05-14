@@ -210,77 +210,79 @@ function processData(voorstellingen, HTMLtimer) {
 
 // Paint the DOM
 function createHTML(voorstellingen) {
-  let count;
-  let timer;
-  let firstrun = false;
+  if (voorstellingen.length) {
+    let count;
+    let timer;
+    let firstrun = false;
 
-  if (!firstrun) {
-    count = 0;
-  } else {
-    count = -1;
-  }
-
-  let titel = document.querySelector('.titel');
-  let artiest = document.querySelector('.artiest');
-  let img = document.querySelector('.img');
-  let locatie = document.querySelector('.locatie');
-  let start = document.querySelector('.start');
-  let pauze = document.querySelector('.pauze');
-  let einde = document.querySelector('.einde');
-
-  // First run
-  titel.innerHTML = voorstellingen[count].titel;
-  artiest.innerHTML = voorstellingen[count].artiest;
-  img.src = `./afbeeldingen/${voorstellingen[count].afb}`;
-  locatie.innerHTML = voorstellingen[count].locatie;
-  start.innerHTML = voorstellingen[count].start;
-  einde.innerHTML = voorstellingen[count].eind;
-
-  if (voorstellingen[count].pauze == null) {
-    pauze.innerHTML = '-';
-  } else {
-    pauze.innerHTML = voorstellingen[count].pauze;
-  }
-
-  // Interval die voor de switch tussen voorstellingen zorgt
-  timer = setInterval(() => {
-    processData(voorstellingen, timer);
-
-    // loop door de array met voorstellingen, switch om de zoveel seconden
-    if (count < voorstellingen.length - 1) {
-      firstrun = true;
-      count++;
-      console.log(count);
-
-      titel.innerHTML = voorstellingen[count].titel;
-      artiest.innerHTML = voorstellingen[count].artiest;
-      img.src = `./afbeeldingen/${voorstellingen[count].afb}`;
-      locatie.innerHTML = voorstellingen[count].locatie;
-      start.innerHTML = voorstellingen[count].start;
-      einde.innerHTML = voorstellingen[count].eind;
-
-      if (voorstellingen[count].pauze == null) {
-        pauze.innerHTML = '-';
-      } else {
-        pauze.innerHTML = voorstellingen[count].pauze;
-      }
-    } else if (count == voorstellingen.length - 1) {
+    if (!firstrun) {
       count = 0;
-
-      titel.innerHTML = voorstellingen[count].titel;
-      artiest.innerHTML = voorstellingen[count].artiest;
-      img.src = `./afbeeldingen/${voorstellingen[count].afb}`;
-      locatie.innerHTML = voorstellingen[count].locatie;
-      start.innerHTML = voorstellingen[count].start;
-      einde.innerHTML = voorstellingen[count].eind;
-
-      if (voorstellingen[count].pauze == null) {
-        pauze.innerHTML = '-';
-      } else {
-        pauze.innerHTML = voorstellingen[count].pauze;
-      }
+    } else {
+      count = -1;
     }
-  }, 10000);
+
+    let titel = document.querySelector('.titel');
+    let artiest = document.querySelector('.artiest');
+    let img = document.querySelector('.img');
+    let locatie = document.querySelector('.locatie');
+    let start = document.querySelector('.start');
+    let pauze = document.querySelector('.pauze');
+    let einde = document.querySelector('.einde');
+
+    // First run
+    titel.innerHTML = voorstellingen[count].titel;
+    artiest.innerHTML = voorstellingen[count].artiest;
+    img.src = `./afbeeldingen/${voorstellingen[count].afb}`;
+    locatie.innerHTML = voorstellingen[count].locatie;
+    start.innerHTML = voorstellingen[count].start;
+    einde.innerHTML = voorstellingen[count].eind;
+
+    if (voorstellingen[count].pauze == null) {
+      pauze.innerHTML = '-';
+    } else {
+      pauze.innerHTML = voorstellingen[count].pauze;
+    }
+
+    // Interval die voor de switch tussen voorstellingen zorgt
+    timer = setInterval(() => {
+      processData(voorstellingen, timer);
+
+      // loop door de array met voorstellingen, switch om de zoveel seconden
+      if (count < voorstellingen.length - 1) {
+        firstrun = true;
+        count++;
+        console.log(count);
+
+        titel.innerHTML = voorstellingen[count].titel;
+        artiest.innerHTML = voorstellingen[count].artiest;
+        img.src = `./afbeeldingen/${voorstellingen[count].afb}`;
+        locatie.innerHTML = voorstellingen[count].locatie;
+        start.innerHTML = voorstellingen[count].start;
+        einde.innerHTML = voorstellingen[count].eind;
+
+        if (voorstellingen[count].pauze == null) {
+          pauze.innerHTML = '-';
+        } else {
+          pauze.innerHTML = voorstellingen[count].pauze;
+        }
+      } else if (count == voorstellingen.length - 1) {
+        count = 0;
+
+        titel.innerHTML = voorstellingen[count].titel;
+        artiest.innerHTML = voorstellingen[count].artiest;
+        img.src = `./afbeeldingen/${voorstellingen[count].afb}`;
+        locatie.innerHTML = voorstellingen[count].locatie;
+        start.innerHTML = voorstellingen[count].start;
+        einde.innerHTML = voorstellingen[count].eind;
+
+        if (voorstellingen[count].pauze == null) {
+          pauze.innerHTML = '-';
+        } else {
+          pauze.innerHTML = voorstellingen[count].pauze;
+        }
+      }
+    }, 10000);
+  }
 }
 
 // Some helper functions //
